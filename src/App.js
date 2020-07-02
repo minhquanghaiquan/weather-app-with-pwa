@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { fetchWeather } from './api/weather.js';
 import './App.css';
@@ -15,10 +15,18 @@ const App = () => {
         }
         
     }
+
+    useEffect(() => {
+      const getData = async () => {
+        const data = await fetchWeather('New York');
+        setWeather(data);
+      }
+       getData()
+    }, []);
         
 
         
-    
+    if(!weather) return <div>Loading...</div>
 
     return (
         <div className="main-container">
